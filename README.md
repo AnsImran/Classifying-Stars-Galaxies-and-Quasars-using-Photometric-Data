@@ -25,5 +25,6 @@ In this notebook I have tried to classify Quasars, Galaxies and Stars using phot
    - ##### Random Forest 
 
 ## 4. Model Ensembling
+   - ##### Simple-Random-Search for weight optimization
 
 ## 5. Summarizing the Results
