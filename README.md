@@ -7,7 +7,7 @@ In this notebook I have tried to classify Quasars, Galaxies and Stars using phot
    - ##### Removing unphysical records/rows
    - ##### Creating training, validation and test splits
    - ##### Converting data into numpy arrays
-   - ##### Feature Scaling
+   - ##### Normalizing The Data
 
 ## 2. Data Visualisation
  - #### Principal Component Analysis
