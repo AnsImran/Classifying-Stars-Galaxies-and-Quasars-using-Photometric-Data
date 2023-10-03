@@ -15,7 +15,7 @@ In this notebook I have tried to classify Quasars, Galaxies and Stars using phot
 
 ## 3. Data Classification
  - ### Unsupervised Learning
-   - ##### Gaussian Mixture Model Clustering
+   - ##### Gaussian Mixture Model - Clustering
 
  - ### Supervised Learning
    - ##### Neural Network
