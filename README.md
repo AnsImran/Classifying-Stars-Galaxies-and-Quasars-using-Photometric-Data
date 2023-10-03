@@ -1,8 +1,6 @@
 # Classifying-Quasars-Stars-Galaxies-using-Photometry
 In this notebook I have tried to classify Quasars, Galaxies and Stars using photometric measurements.
 
-# What's in the notebook?
-
 ## 1. Data Cleaning & Data Preparation
    - ##### Pandas Data Frame
    - ##### Slicing out relevant columns
