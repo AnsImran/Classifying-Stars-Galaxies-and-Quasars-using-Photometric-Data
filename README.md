@@ -1,7 +1,7 @@
 # Classifying-Quasars-Stars-Galaxies-using-Photometry
 In this notebook I have tried to classify Quasars, Galaxies and Stars using photometric measurements.
 
-[The dataset used](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
+## [Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
 
 ## 1. Data Cleaning & Data Preparation
    - ##### Loading data as a Pandas Data Frame
