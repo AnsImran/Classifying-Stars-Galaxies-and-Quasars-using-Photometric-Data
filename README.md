@@ -3,7 +3,7 @@ In this notebook I have tried to classify Quasars, Galaxies and Stars using phot
 
 ## 1. Data Cleaning & Data Preparation
    - ##### Loading data as a Pandas Data Frame
-   - ##### Slicing out relevant columns
+   - ##### Selecting relevant columns/features
    - ##### Looking for unphysical records/rows
    - ##### Creating training, validation and test splits
    - ##### Converting data into numpy arrays
