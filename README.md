@@ -2,6 +2,7 @@
 In this notebook I have tried to classify Quasars, Galaxies and Stars using photometric measurements.
 
 ### Skills demonstarted:
+
 (pandas, numpy, tensorflow/keras, scikit-learn & matplotlib)
 
 ## [Based on Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
