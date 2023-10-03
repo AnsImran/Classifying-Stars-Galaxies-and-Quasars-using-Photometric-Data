@@ -2,7 +2,7 @@
 In this notebook I have tried to classify Quasars, Galaxies and Stars using photometric measurements.
 
 ## 1. Data Cleaning & Data Preparation
-   - ##### Pandas Data Frame
+   - ##### Loading data as a Pandas Data Frame
    - ##### Slicing out relevant columns
    - ##### Looking for unphysical records/rows
    - ##### Creating training, validation and test splits
