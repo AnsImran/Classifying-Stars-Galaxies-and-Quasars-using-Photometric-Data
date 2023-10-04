@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from itertools import permutations
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 
 def plot_boxplots_for_dataframe_columns(data_frame):
     """
@@ -138,7 +139,8 @@ def plot_training_history(history):
 
 def generate_permutation_dict(arr):
     """
-    Generate a dictionary of permutations for an input array.
+    Generate a dictionary of shuffled arrays using the input array & permutations of [0, 1, 2].
+    The array is shuffled based on the different permutations of [0, 1, 2]
 
     Parameters:
     arr (numpy.ndarray or list): Input array containing values to be permuted.
@@ -167,9 +169,62 @@ def generate_permutation_dict(arr):
     
     return reversed_permutations_dict
 
-# input_arr = [0, 1, 2]
+# input_arr = [0, 1, 2, 0, 1, 2, 2, 1, 0]
 # result    = generate_permutation_dict(input_arr)
 # print(result)
+
+
+
+
+
+# import numpy as np
+# from itertools import permutations
+
+def shuffle_columns(input_indices, input_array):
+    """
+    Shuffle columns of the input array based on permutations of input_indices.
+
+    Parameters:
+    input_indices (list): List of indices representing column order.
+    input_array (numpy.ndarray): Input array to be shuffled.
+
+    Returns:
+    dict: A dictionary where keys are formatted as "permutation(0, 1, 2)" and values are shuffled arrays.
+    """
+    permutation_dict = {}
+
+    # Generate all permutations of input_indices
+    index_permutations = permutations(input_indices)
+
+    for perm in index_permutations:
+        # Create a key based on the current permutation
+        key = f"permutation({', '.join(map(str, perm))})"
+
+        # Shuffle columns of input_array based on the current permutation
+        shuffled_array = input_array[:, list(perm)]
+
+        # Store the shuffled array in the dictionary
+        permutation_dict[key] = shuffled_array
+
+    return permutation_dict
+
+# # Example usage:
+# input_indices = [0, 1, 2]
+# input_array = np.array([[1, 2, 3],
+#                         [4, 5, 6],
+#                         [7, 8, 9]])
+
+# result_dict = shuffle_columns(input_indices, input_array)
+
+# # Print the shuffled arrays for each permutation with formatted keys
+# for key, shuffled_array in result_dict.items():
+#     print(f"{key}:")
+#     print(shuffled_array)
+#     print()
+
+
+
+
 
 
 
@@ -240,6 +295,60 @@ def optimize_weights_with_random_search(true_labels, model_predictions, num_iter
     best_weights, best_accuracy = random_search_optimization()
 
     return best_weights, best_accuracy
+
+
+
+
+
+
+
+def score_calculator(probs_array, true_labels, shape_array):
+    score = np.sum(np.argmax(probs_array, axis=1) == true_labels) / shape_array.shape[0]
+    return score
+
+# e.g:
+# score_calculator(gmm_test_probs, test_labels, test_np)
+
+
+def score_calculator_for_preds(preds_array, true_labels, shape_array):
+    score = np.sum(preds_array == true_labels) / shape_array.shape[0]
+    return score
+
+# e.g:
+# score_calculator_for_preds(gmm_valid_preds, valid_labels, valid_np)
+
+
+
+
+
+
+
+
+
+
+#from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
+
+def classification_report_and_confusion_matrix(true_labels, predicted_labels):
+    """
+    Calculate and display a classification report and a confusion matrix.
+
+    Parameters:
+    true_labels (array-like): Ground truth (correct) target labels.
+    predicted_labels (array-like): Predicted target labels.
+
+    Returns:
+    None: The function prints the classification report and displays the confusion matrix.
+    """
+    # Generating the classification report
+    report = classification_report(true_labels, predicted_labels)
+    print(report)
+    
+    # Generating and displaying the confusion matrix
+    conf_matrix = confusion_matrix(true_labels, predicted_labels)
+    disp        = ConfusionMatrixDisplay(confusion_matrix=conf_matrix,
+                                         display_labels=['Quasar', 'Galaxy', 'Star'])
+    disp.plot(cmap='Blues')
+
 
 
 
