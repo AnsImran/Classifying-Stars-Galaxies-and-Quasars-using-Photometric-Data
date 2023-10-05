@@ -7,10 +7,13 @@ In this notebook I have tried to classify Quasars, Galaxies and Stars using phot
 
 ## [Based on Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
 
+# What's in the notebook?
+
 ## 1. Data Cleaning & Data Preparation
    - ##### Loading data as a Pandas Data Frame
    - ##### Selecting relevant columns/features
    - ##### Removing unphysical records/rows
+   - ##### Undersampling
    - ##### Creating training, validation and test splits
    - ##### Converting data into numpy arrays
    - ##### Normalizing The Data
@@ -32,3 +35,7 @@ In this notebook I have tried to classify Quasars, Galaxies and Stars using phot
    - ##### Simple-Random-Search for weight optimization
 
 ## 5. Conclusions
+
+## 6. What's Next?
+   - ##### How can we achieve this?
+   - ##### Possible Limitations
