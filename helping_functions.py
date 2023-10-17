@@ -3,37 +3,9 @@ import pandas as pd
 import numpy as np
 from itertools import permutations
 from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
+import pickle
+from tensorflow.keras.models import load_model
 
-def plot_boxplots_for_dataframe_columns(data_frame):
-    """
-    Create boxplots for all columns in a pandas DataFrame to detect outliers.
-
-    Args:
-        data_frame (pd.DataFrame): The input DataFrame containing the data.
-
-    Returns:
-        None
-    """
-    plt.figure(figsize=(18, 3))  # Set the figure size
-
-    for col in data_frame.columns:
-        plt.subplot(1, len(data_frame.columns), list(data_frame.columns).index(col) + 1)
-        plt.boxplot(data_frame[col], vert=False)
-        plt.xlabel(col)
-
-    plt.suptitle('Boxplots for DataFrame Columns', y=1.02)  # Add a title above the subplots
-    plt.tight_layout()  # Ensure proper spacing between subplots
-    plt.show()
-
-# # Sample DataFrame
-# data = {'Column1': [10, 15, 20, 25, 30, 35, 40, 45, 100],
-#         'Column2': [5, 10, 15, 20, 25, 30, 35, 40, 45],
-#         'Column3': [8, 12, 16, 24, 32, 48, 60, 72, 90]}
-
-# df = pd.DataFrame(data)
-
-# # Call the function with the sample DataFrame
-# plot_boxplots_for_dataframe_columns(df)
 
 
 
@@ -110,14 +82,14 @@ def plot_training_history(history):
 
     epochs = range(1, len(acc) + 1)
 
-    # Plot training and validation accuracy
+    # Plotting training and validation accuracy
     plt.plot(epochs, acc, 'bo', label='Training acc')
     plt.plot(epochs, val_acc, 'b', label='Validation acc')
     plt.title('Training and validation accuracy')
     plt.legend()
     plt.show()
 
-    # Plot training and validation loss
+    # Plotting training and validation loss
     plt.figure()
     plt.plot(epochs, loss, 'bo', label='Training loss')
     plt.plot(epochs, val_loss, 'b', label='Validation loss')
@@ -348,6 +320,577 @@ def classification_report_and_confusion_matrix(true_labels, predicted_labels):
     disp        = ConfusionMatrixDisplay(confusion_matrix=conf_matrix,
                                          display_labels=['Quasar', 'Galaxy', 'Star'])
     disp.plot(cmap='Blues')
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import pandas as pd
+# import numpy as np
+
+def probabilities_to_dataframe(probabilities_array):
+    """
+    Convert a 2D NumPy array of probabilities into a well-structured DataFrame.
+    It can only handle 3 classes i.e in your probabilities_array, there are probabilities corresponding to only 3 classes
+
+    Args:
+    probabilities_array (numpy.ndarray): A 2D array with rows representing different samples
+        and columns representing class probabilities.
+
+    Returns:
+    pandas.DataFrame: A DataFrame with columns for class probabilities, predicted labels, and
+        the maximum normalized probability for each sample.
+
+    Example:
+    >>> probabilities_array = np.array([[0.2, 0.3, 0.5], [0.6, 0.1, 0.3], [0.4, 0.5, 0.1]])
+    >>> result_df = probabilities_to_dataframe(probabilities_array)
+    >>> print(result_df)
+    """
+
+    # Creating a DataFrame from the probabilities_array
+    df = pd.DataFrame(probabilities_array, columns=['prob_of_being_Quasar', 'prob_of_being_Galaxy', 'prob_of_being_Star'])
+
+    # Normalizing the probabilities in each row
+    df = df.div(df.sum(axis=1), axis=0)
+
+    # Adding a 'Predicted_Label' column with the index of the class with the highest probability
+    df['predicted_label'] = df.idxmax(axis=1)
+
+    # Defining a dictionary to specify the replacements
+    label_replacements = {'prob_of_being_Quasar': 'quasar', 'prob_of_being_Galaxy': 'galaxy', 'prob_of_being_Star': 'star'}
+
+    # Using the map method to perform the replacements
+    df['predicted_label'] = df['predicted_label'].map(label_replacements)
+
+    # Adding a 'Normalized_Probability_of_Predicted_Class' column with the value of the highest predicted probability
+    df['Probability_of_Predicted_Class'] = df[['prob_of_being_Quasar', 'prob_of_being_Galaxy', 'prob_of_being_Star']].max(axis=1)
+
+    df.index.name = 'sample_no.'
+
+    return df
+
+# Example usage:
+# Assuming probabilities_array is your array of predictions
+# Replace this with your actual predictions
+# probabilities_array = np.array([[0.2, 0.3, 0.5], [0.6, 0.1, 0.3], [0.4, 0.5, 0.1]])
+# result_df = probabilities_to_dataframe(probabilities_array)
+# result_df
+
+
+
+
+
+
+
+# def classification_probability_displayer(Probabilities, True_Labels):
+#     data_frame_for_probabilities_of_current_model = probabilities_to_dataframe(Probabilities)
+#     data_frame_for_probabilities_of_current_model['True_class'] = True_Labels
+#     # Defining a dictionary to specify the replacements
+#     label_replacements = {0: 'quasar', 1: 'galaxy', 2: 'star'}
+#     # Using the map method to perform the replacements
+#     data_frame_for_probabilities_of_current_model['True_class'] = data_frame_for_probabilities_of_current_model['True_class'].map(label_replacements)
+
+
+    
+#     groups_df = data_frame_for_probabilities_of_current_model.groupby('predicted_label')
+
+    
+#     total_no_of_samples = len(True_Labels)
+#     print(f'total_no_of_samples: {total_no_of_samples}')
+#     ####################################################
+#     no_of_samples_of_each_class = len(True_Labels)//len(groups_df.groups)
+#     print(f'no_of_samples_of_each_class: {no_of_samples_of_each_class}'); print()
+
+    
+#     # Note: When there are mre than 3 classes, you'll have to add extra lines as appropriate. furthermore, be careful about the proper name of each group 
+#     predicted_quasars_df  = groups_df.get_group('quasar')
+#     predicted_galaxies_df = groups_df.get_group('galaxy')
+#     predicted_stars_df    = groups_df.get_group('star')
+
+
+
+#     predicted_percentage_of_quasars = (len(predicted_quasars_df)/total_no_of_samples)*100
+#     print(f'predicted_percentage_of_quasars:  {predicted_percentage_of_quasars}')
+#     true_percentage_of_quasars = (no_of_samples_of_each_class/total_no_of_samples)*100
+#     print(f'true_percentage_of_quasars:       {true_percentage_of_quasars}'); print()
+#     #######################################################################
+#     predicted_percentage_of_galaxies = (len(predicted_galaxies_df)/total_no_of_samples)*100
+#     print(f'predicted_percentage_of_galaxies: {predicted_percentage_of_galaxies}')
+#     true_percentage_of_galaxies = (no_of_samples_of_each_class/total_no_of_samples)*100
+#     print(f'true_percentage_of_galaxies:      {true_percentage_of_galaxies}'); print()
+#     ########################################################################    
+#     predicted_percentage_of_stars = (len(predicted_stars_df)/total_no_of_samples)*100
+#     print(f'predicted_percentage_of_stars:    {predicted_percentage_of_stars}')
+#     true_percentage_of_stars = (no_of_samples_of_each_class/total_no_of_samples)*100
+#     print(f'true_percentage_of_stars:         {true_percentage_of_stars}'); print()
+
+
+
+#     # Class-1 - Quasars
+
+#     # indices of wrong predictions
+#     mask    = predicted_quasars_df['predicted_label'] != predicted_quasars_df['True_class']
+#     indices = groups_df.get_group('quasar').index[mask].tolist()
+     
+#     no_of_samples_misclassified_as_quasars = len(indices)
+#     print(f'no_of_samples_misclassified_as_quasars: {no_of_samples_misclassified_as_quasars}')
+
+#     samples_misclassified_as_quasars_with_probability_greater_than_0_6 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.6)/no_of_samples_misclassified_as_quasars)*100
+#     print(f'samples_misclassified_as_quasars_with_probability_greater_than_0_6:  {samples_misclassified_as_quasars_with_probability_greater_than_0_6}')
+#     ######################
+#     samples_misclassified_as_quasars_with_probability_greater_than_0_7 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.7)/no_of_samples_misclassified_as_quasars)*100
+#     print(f'samples_misclassified_as_quasars_with_probability_greater_than_0_7:  {samples_misclassified_as_quasars_with_probability_greater_than_0_7}')
+#     ######################
+#     samples_misclassified_as_quasars_with_probability_greater_than_0_8 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.8)/no_of_samples_misclassified_as_quasars)*100
+#     print(f'samples_misclassified_as_quasars_with_probability_greater_than_0_8:  {samples_misclassified_as_quasars_with_probability_greater_than_0_8}')
+#     ######################
+#     samples_misclassified_as_quasars_with_probability_greater_than_0_9 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.9)/no_of_samples_misclassified_as_quasars)*100
+#     print(f'samples_misclassified_as_quasars_with_probability_greater_than_0_9:  {samples_misclassified_as_quasars_with_probability_greater_than_0_9}')
+#     ######################
+#     samples_misclassified_as_quasars_with_probability_greater_than_0_99 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.99)/no_of_samples_misclassified_as_quasars)*100
+#     print(f'samples_misclassified_as_quasars_with_probability_greater_than_0_99: {samples_misclassified_as_quasars_with_probability_greater_than_0_99}')
+#     print()
+    
+    
+#     # indices of correct predictions
+#     mask    = predicted_quasars_df['predicted_label'] == predicted_quasars_df['True_class']
+#     indices = groups_df.get_group('quasar').index[mask].tolist()
+    
+#     no_of_samples_correctly_classified_as_quasars = len(indices)
+#     print(f'no_of_samples_correctly_classified_as_quasars: {no_of_samples_correctly_classified_as_quasars}')
+    
+#     samples_correctly_classified_as_quasars_with_probability_greater_than_0_6 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.6)/no_of_samples_correctly_classified_as_quasars)*100
+#     print(f'samples_correctly_classified_as_quasars_with_probability_greater_than_0_6:  {samples_correctly_classified_as_quasars_with_probability_greater_than_0_6}')
+#     ######################    
+#     samples_correctly_classified_as_quasars_with_probability_greater_than_0_7 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.7)/no_of_samples_correctly_classified_as_quasars)*100
+#     print(f'samples_correctly_classified_as_quasars_with_probability_greater_than_0_7:  {samples_correctly_classified_as_quasars_with_probability_greater_than_0_7}')
+#     ######################
+#     samples_correctly_classified_as_quasars_with_probability_greater_than_0_8 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.8)/no_of_samples_correctly_classified_as_quasars)*100
+#     print(f'samples_correctly_classified_as_quasars_with_probability_greater_than_0_8:  {samples_correctly_classified_as_quasars_with_probability_greater_than_0_8}')
+#     ######################
+#     samples_correctly_classified_as_quasars_with_probability_greater_than_0_9 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.9)/no_of_samples_correctly_classified_as_quasars)*100
+#     print(f'samples_correctly_classified_as_quasars_with_probability_greater_than_0_9:  {samples_correctly_classified_as_quasars_with_probability_greater_than_0_9}')
+#     ######################
+#     samples_correctly_classified_as_quasars_with_probability_greater_than_0_99 = (np.sum(predicted_quasars_df.loc[indices].Probability_of_Predicted_Class > 0.99)/no_of_samples_correctly_classified_as_quasars)*100
+#     print(f'samples_correctly_classified_as_quasars_with_probability_greater_than_0_99: {samples_correctly_classified_as_quasars_with_probability_greater_than_0_99}')
+#     print('\n')
+
+    
+
+#     # Class-2 - Galaxies
+
+#     # indices of wrong predictions
+#     mask    = predicted_galaxies_df['predicted_label'] != predicted_galaxies_df['True_class']
+#     indices = groups_df.get_group('galaxy').index[mask].tolist()
+     
+#     no_of_samples_misclassified_as_galaxies = len(indices)
+#     print(f'no_of_samples_misclassified_as_galaxies: {no_of_samples_misclassified_as_galaxies}')
+
+#     samples_misclassified_as_galaxies_with_probability_greater_than_0_6 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.6)/no_of_samples_misclassified_as_galaxies)*100
+#     print(f'samples_misclassified_as_galaxies_with_probability_greater_than_0_6:  {samples_misclassified_as_galaxies_with_probability_greater_than_0_6}')
+#     ######################
+#     samples_misclassified_as_galaxies_with_probability_greater_than_0_7 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.7)/no_of_samples_misclassified_as_galaxies)*100
+#     print(f'samples_misclassified_as_galaxies_with_probability_greater_than_0_7:  {samples_misclassified_as_galaxies_with_probability_greater_than_0_7}')
+#     ######################
+#     samples_misclassified_as_galaxies_with_probability_greater_than_0_8 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.8)/no_of_samples_misclassified_as_galaxies)*100
+#     print(f'samples_misclassified_as_galaxies_with_probability_greater_than_0_8:  {samples_misclassified_as_galaxies_with_probability_greater_than_0_8}')
+#     ######################
+#     samples_misclassified_as_galaxies_with_probability_greater_than_0_9 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.9)/no_of_samples_misclassified_as_galaxies)*100
+#     print(f'samples_misclassified_as_galaxies_with_probability_greater_than_0_9:  {samples_misclassified_as_galaxies_with_probability_greater_than_0_9}')
+#     ######################
+#     samples_misclassified_as_galaxies_with_probability_greater_than_0_99 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.99)/no_of_samples_misclassified_as_galaxies)*100
+#     print(f'samples_misclassified_as_galaxies_with_probability_greater_than_0_99: {samples_misclassified_as_galaxies_with_probability_greater_than_0_99}')
+#     print()
+    
+    
+#     # indices of correct predictions
+#     mask    = predicted_galaxies_df['predicted_label'] == predicted_galaxies_df['True_class']
+#     indices = groups_df.get_group('galaxy').index[mask].tolist()
+    
+#     no_of_samples_correctly_classified_as_galaxies = len(indices)
+#     print(f'no_of_samples_correctly_classified_as_galaxies: {no_of_samples_correctly_classified_as_galaxies}')
+    
+#     samples_correctly_classified_as_galaxies_with_probability_greater_than_0_6 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.6)/no_of_samples_correctly_classified_as_galaxies)*100
+#     print(f'samples_correctly_classified_as_galaxies_with_probability_greater_than_0_6:  {samples_correctly_classified_as_galaxies_with_probability_greater_than_0_6}')
+#     ######################    
+#     samples_correctly_classified_as_galaxies_with_probability_greater_than_0_7 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.7)/no_of_samples_correctly_classified_as_galaxies)*100
+#     print(f'samples_correctly_classified_as_galaxies_with_probability_greater_than_0_7:  {samples_correctly_classified_as_galaxies_with_probability_greater_than_0_7}')
+#     ######################
+#     samples_correctly_classified_as_galaxies_with_probability_greater_than_0_8 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.8)/no_of_samples_correctly_classified_as_galaxies)*100
+#     print(f'samples_correctly_classified_as_galaxies_with_probability_greater_than_0_8:  {samples_correctly_classified_as_galaxies_with_probability_greater_than_0_8}')
+#     ######################
+#     samples_correctly_classified_as_galaxies_with_probability_greater_than_0_9 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.9)/no_of_samples_correctly_classified_as_galaxies)*100
+#     print(f'samples_correctly_classified_as_galaxies_with_probability_greater_than_0_9:  {samples_correctly_classified_as_galaxies_with_probability_greater_than_0_9}')
+#     ######################
+#     samples_correctly_classified_as_galaxies_with_probability_greater_than_0_99 = (np.sum(predicted_galaxies_df.loc[indices].Probability_of_Predicted_Class > 0.99)/no_of_samples_correctly_classified_as_galaxies)*100
+#     print(f'samples_correctly_classified_as_galaxies_with_probability_greater_than_0_99: {samples_correctly_classified_as_galaxies_with_probability_greater_than_0_99}')
+#     print('\n')
+
+    
+    
+
+
+#     # Class-3 - stars
+
+#     # indices of wrong predictions
+#     mask    = predicted_stars_df['predicted_label'] != predicted_stars_df['True_class']
+#     indices = groups_df.get_group('star').index[mask].tolist()
+     
+#     no_of_samples_misclassified_as_stars = len(indices)
+#     print(f'no_of_samples_misclassified_as_stars: {no_of_samples_misclassified_as_stars}')
+
+#     samples_misclassified_as_stars_with_probability_greater_than_0_6 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.6)/no_of_samples_misclassified_as_stars)*100
+#     print(f'samples_misclassified_as_stars_with_probability_greater_than_0_6:  {samples_misclassified_as_stars_with_probability_greater_than_0_6}')
+#     ######################
+#     samples_misclassified_as_stars_with_probability_greater_than_0_7 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.7)/no_of_samples_misclassified_as_stars)*100
+#     print(f'samples_misclassified_as_stars_with_probability_greater_than_0_7:  {samples_misclassified_as_stars_with_probability_greater_than_0_7}')
+#     ######################
+#     samples_misclassified_as_stars_with_probability_greater_than_0_8 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.8)/no_of_samples_misclassified_as_stars)*100
+#     print(f'samples_misclassified_as_stars_with_probability_greater_than_0_8:  {samples_misclassified_as_stars_with_probability_greater_than_0_8}')
+#     ######################
+#     samples_misclassified_as_stars_with_probability_greater_than_0_9 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.9)/no_of_samples_misclassified_as_stars)*100
+#     print(f'samples_misclassified_as_stars_with_probability_greater_than_0_9:  {samples_misclassified_as_stars_with_probability_greater_than_0_9}')
+#     ######################
+#     samples_misclassified_as_stars_with_probability_greater_than_0_99 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.99)/no_of_samples_misclassified_as_stars)*100
+#     print(f'samples_misclassified_as_stars_with_probability_greater_than_0_99: {samples_misclassified_as_stars_with_probability_greater_than_0_99}')
+#     print()
+    
+    
+#     # indices of correct predictions
+#     mask    = predicted_stars_df['predicted_label'] == predicted_stars_df['True_class']
+#     indices = groups_df.get_group('star').index[mask].tolist()
+    
+#     no_of_samples_correctly_classified_as_stars = len(indices)
+#     print(f'no_of_samples_correctly_classified_as_stars: {no_of_samples_correctly_classified_as_stars}')
+    
+#     samples_correctly_classified_as_stars_with_probability_greater_than_0_6 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.6)/no_of_samples_correctly_classified_as_stars)*100
+#     print(f'samples_correctly_classified_as_stars_with_probability_greater_than_0_6:  {samples_correctly_classified_as_stars_with_probability_greater_than_0_6}')
+#     ######################    
+#     samples_correctly_classified_as_stars_with_probability_greater_than_0_7 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.7)/no_of_samples_correctly_classified_as_stars)*100
+#     print(f'samples_correctly_classified_as_stars_with_probability_greater_than_0_7:  {samples_correctly_classified_as_stars_with_probability_greater_than_0_7}')
+#     ######################
+#     samples_correctly_classified_as_stars_with_probability_greater_than_0_8 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.8)/no_of_samples_correctly_classified_as_stars)*100
+#     print(f'samples_correctly_classified_as_stars_with_probability_greater_than_0_8:  {samples_correctly_classified_as_stars_with_probability_greater_than_0_8}')
+#     ######################
+#     samples_correctly_classified_as_stars_with_probability_greater_than_0_9 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.9)/no_of_samples_correctly_classified_as_stars)*100
+#     print(f'samples_correctly_classified_as_stars_with_probability_greater_than_0_9:  {samples_correctly_classified_as_stars_with_probability_greater_than_0_9}')
+#     ######################
+#     samples_correctly_classified_as_stars_with_probability_greater_than_0_99 = (np.sum(predicted_stars_df.loc[indices].Probability_of_Predicted_Class > 0.99)/no_of_samples_correctly_classified_as_stars)*100
+#     print(f'samples_correctly_classified_as_stars_with_probability_greater_than_0_99: {samples_correctly_classified_as_stars_with_probability_greater_than_0_99}')
+
+
+
+
+
+
+
+
+
+# import pandas as pd
+# import numpy as np
+
+def classification_probability_displayer(Probabilities, True_Labels):
+    """
+    Display classification statistics and probabilities based on input probabilities and true labels.
+
+    Args:
+        Probabilities (list or array): Predicted class probabilities for each sample.
+        True_Labels (list or array): True class labels for each sample.
+
+    Returns:
+        None
+    """
+    # Convert probabilities to a DataFrame
+    data_frame_for_probabilities_of_current_model = probabilities_to_dataframe(Probabilities)
+    
+    # Add true class labels to the DataFrame
+    data_frame_for_probabilities_of_current_model['True_class'] = True_Labels
+    
+    # Define a dictionary to specify the replacements for class labels
+    label_replacements = {0: 'quasar', 1: 'galaxy', 2: 'star'}
+    
+    # Use the map method to perform the replacements for true class labels
+    data_frame_for_probabilities_of_current_model['True_class'] = data_frame_for_probabilities_of_current_model['True_class'].map(label_replacements)
+
+    # Group the DataFrame by predicted labels
+    groups_df = data_frame_for_probabilities_of_current_model.groupby('predicted_label')
+
+    # Calculate total number of samples
+    total_no_of_samples = len(True_Labels)
+    print(f'total_no_of_samples: {total_no_of_samples}')
+    
+    # Calculate the number of samples of each class
+    no_of_samples_of_each_class = len(True_Labels) // len(groups_df.groups)
+    print(f'no_of_samples_of_each_class: {no_of_samples_of_each_class}\n')
+
+    # Calculate and display statistics for Quasars
+    predicted_quasars_df = groups_df.get_group('quasar')
+    predicted_percentage_of_quasars = (len(predicted_quasars_df) / total_no_of_samples) * 100
+    print(f'predicted_percentage_of_quasars: {predicted_percentage_of_quasars}')
+    true_percentage_of_quasars = (no_of_samples_of_each_class / total_no_of_samples) * 100
+    print(f'true_percentage_of_quasars: {true_percentage_of_quasars}\n')
+
+    # Calculate and display statistics for Galaxies
+    predicted_galaxies_df = groups_df.get_group('galaxy')
+    predicted_percentage_of_galaxies = (len(predicted_galaxies_df) / total_no_of_samples) * 100
+    print(f'predicted_percentage_of_galaxies: {predicted_percentage_of_galaxies}')
+    true_percentage_of_galaxies = (no_of_samples_of_each_class / total_no_of_samples) * 100
+    print(f'true_percentage_of_galaxies: {true_percentage_of_galaxies}\n')
+
+    # Calculate and display statistics for Stars
+    predicted_stars_df = groups_df.get_group('star')
+    predicted_percentage_of_stars = (len(predicted_stars_df) / total_no_of_samples) * 100
+    print(f'predicted_percentage_of_stars: {predicted_percentage_of_stars}')
+    true_percentage_of_stars = (no_of_samples_of_each_class / total_no_of_samples) * 100
+    print(f'true_percentage_of_stars: {true_percentage_of_stars}\n')
+
+    # Function to calculate statistics for misclassified and correctly classified samples
+    def calculate_statistics(class_df, label):
+        mask = class_df['predicted_label'] != class_df['True_class']
+        indices = groups_df.get_group(label).index[mask].tolist()
+        no_of_samples_misclassified = len(indices)
+        print(f'no_of_samples_misclassified_as_{label}s: {no_of_samples_misclassified}')
+
+        for threshold in [0.6, 0.7, 0.8, 0.9, 0.99]:
+            samples_misclassified_with_probability = (np.sum(class_df.loc[indices]['Probability_of_Predicted_Class'] > threshold) / no_of_samples_misclassified) * 100
+            print(f'samples_misclassified_as_{label}s_with_probability_greater_than_{threshold}: {samples_misclassified_with_probability}')
+
+        mask = class_df['predicted_label'] == class_df['True_class']
+        indices = groups_df.get_group(label).index[mask].tolist()
+        no_of_samples_correctly_classified = len(indices); print()
+        print(f'no_of_samples_correctly_classified_as_{label}s: {no_of_samples_correctly_classified}')
+
+        for threshold in [0.6, 0.7, 0.8, 0.9, 0.99]:
+            samples_correctly_classified_with_probability = (np.sum(class_df.loc[indices]['Probability_of_Predicted_Class'] > threshold) / no_of_samples_correctly_classified) * 100
+            print(f'samples_correctly_classified_as_{label}s_with_probability_greater_than_{threshold}: {samples_correctly_classified_with_probability}')
+        print('\n\n')
+
+    # Calculate and display statistics for misclassified and correctly classified Quasars
+    calculate_statistics(predicted_quasars_df, 'quasar')
+
+    # Calculate and display statistics for misclassified and correctly classified Galaxies
+    calculate_statistics(predicted_galaxies_df, 'galaxy')
+
+    # Calculate and display statistics for misclassified and correctly classified Stars
+    calculate_statistics(predicted_stars_df, 'star')
+
+
+
+
+
+
+
+
+
+def predictions_corresponding_to_correct_permutation(data_points_np_normalized, true_labels, gmm_model):
+    """
+    Obtain GMM predicted probabilities for the correct permutation of features.
+
+    Args:
+        data_points_np_normalized (array): Normalized data points.
+        true_labels (array): True class labels.
+        gmm_model: Trained Gaussian Mixture Model.
+
+    Returns:
+        array: GMM predicted probabilities for the correct permutation of features.
+    """
+    # Get GMM predicted probabilities for the input data
+    gmm_probs = gmm_model.predict_proba(data_points_np_normalized)
+    
+    # Define the input indices for column permutation
+    input_indices = [0, 1, 2]
+    
+    # Generate a dictionary with probabilities for all permutations
+    dict_probs = shuffle_columns(input_indices, gmm_probs)
+    
+    # Initialize variables to track the best permutation
+    highest_score = 0
+    max_key = 0
+    
+    # Find the permutation with the highest score
+    for key, value in dict_probs.items():
+        current_score = score_calculator(value, true_labels, data_points_np_normalized)
+        
+        if current_score > highest_score:
+            highest_score = current_score
+            max_key = key
+
+    # Update GMM probabilities with the best permutation
+    gmm_probs = dict_probs[max_key]
+    
+    return gmm_probs
+
+# gmm_probs = predictions_corresponding_to_correct_permutation(data_points_np_normalized, true_labels)
+
+
+
+
+
+
+
+
+
+
+
+# import pickle
+# from tensorflow.keras.models import load_model
+# import numpy as np
+
+def ensemble_of_models_with_true_labels(input_data_normalized, true_labels, best_weights):
+    """
+    Create an ensemble of machine learning models, calculate probabilities, and evaluate the performance.
+
+    This function combines the predictions of Gaussian Mixture Model (GMM), Neural Network (NN),
+    XGBoost (XGB), and Random Forest (RF) models using specified weights and evaluates the
+    performance based on true labels.
+
+    Args:
+    input_data_normalized (numpy.ndarray): Normalized input data.
+    true_labels (numpy.ndarray): True labels for the input data.
+    best_weights (list): List of weights for each model in the order [GMM, NN, XGB, RF].
+
+    Returns:
+    None
+
+    Example:
+    >>> best_weights = [0.2, 0.3, 0.2, 0.3]
+    >>> input_data_normalized = load_input_data('input_data_normalized.pkl')
+    >>> true_labels = load_labels('true_labels.pkl')
+    >>> ensemble_of_models_with_true_labels(input_data_normalized, true_labels, best_weights)
+    """
+
+    # Loading the saved GMM model from the file
+    with open('gmm_model.pkl', 'rb') as file:
+        gmm_model = pickle.load(file)
+    gmm_probs = gmm_model.predict_proba(input_data_normalized)
+
+    # Shuffle GMM model probabilities
+    input_indices = [0, 1, 2]
+    probs_dict = shuffle_columns(input_indices, gmm_probs)
+    gmm_probs = probs_dict['permutation(1, 0, 2)']
+
+    # Loading the saved NN model
+    NN_model = load_model('NN_model.h5')
+    NN_probs = NN_model.predict(input_data_normalized)
+
+    # Loading the saved XGBoost model from the file
+    with open('XGB_model.pkl', 'rb') as file:
+        XGB_model = pickle.load(file)
+    XGB_probs = XGB_model.predict_proba(input_data_normalized)
+
+    # Loading the saved RF model from the file
+    with open('RF_model.pkl', 'rb') as file:
+        RF_model = pickle.load(file)
+    RF_probs = RF_model.predict_proba(input_data_normalized)
+
+    # Collecting model predictions for validation data
+    model_predictions = [gmm_probs, NN_probs, XGB_probs, RF_probs]
+
+    # Assigning the best weights obtained from random search
+    gmm_weight = best_weights[0]
+    NN_weight = best_weights[1]
+    XGB_weight = best_weights[2]
+    RF_weight = best_weights[3]
+
+    # Calculating final probabilities using the best weights for each model
+    final_probs = (gmm_weight * gmm_probs + NN_weight * NN_probs +
+                   XGB_weight * XGB_probs + RF_weight * RF_probs) / 4
+
+    # Converting probabilities into predictions
+    final_predicted_labels = np.argmax(final_probs, axis=1)
+
+    # Generating a classification report and displaying a confusion matrix
+    classification_report_and_confusion_matrix(true_labels, final_predicted_labels)
+
+    # Calculating accuracy for the final predictions
+    score = score_calculator_for_preds(final_predicted_labels, true_labels, input_data_normalized)
+    print(f'Accuracy: {score}')
+
+    classification_probability_displayer(final_probs, true_labels)
+
+
+
+
+
+
+
+
+
+
+# import pickle
+# from tensorflow.keras.models import load_model
+# import pandas as pd
+# import numpy as np
+
+def ensemble_of_models_without_true_labels(input_data_normalized, best_weights):
+    """
+    Create an ensemble of machine learning models and calculate probabilities for each class.
+
+    This function combines the predictions of Gaussian Mixture Model (GMM), Neural Network (NN),
+    XGBoost (XGB), and Random Forest (RF) models using specified weights and returns the
+    final probabilities.
+
+    Args:
+    input_data_normalized (numpy.ndarray): Normalized input data.
+    best_weights (list): List of weights for each model in the order [GMM, NN, XGB, RF].
+
+    Returns:
+    pandas.DataFrame: A DataFrame with columns for class probabilities, predicted labels, and
+        the maximum normalized probability for each sample.
+
+    Example:
+    >>> best_weights = [0.2, 0.3, 0.2, 0.3]
+    >>> probabilities_array = ensemble_of_models_without_true_labels(input_data_normalized, best_weights)
+    >>> print(probabilities_array)
+    """
+
+    # Loading the saved GMM model from the file
+    with open('gmm_model.pkl', 'rb') as file:
+        gmm_model = pickle.load(file)
+    gmm_probs = gmm_model.predict_proba(input_data_normalized)
+
+    # Loading the saved NN model
+    NN_model = load_model('NN_model.h5')
+    NN_probs = NN_model.predict(input_data_normalized)
+
+    # Loading the saved XGBoost model from the file
+    with open('XGB_model.pkl', 'rb') as file:
+        XGB_model = pickle.load(file)
+    XGB_probs = XGB_model.predict_proba(input_data_normalized)
+
+    # Loading the saved RF model from the file
+    with open('RF_model.pkl', 'rb') as file:
+        RF_model = pickle.load(file)
+    RF_probs = RF_model.predict_proba(input_data_normalized)
+
+    # Collecting model predictions for validation data
+    model_predictions = [gmm_probs, NN_probs, XGB_probs, RF_probs]
+    
+    # Assigning the best weights obtained from random search
+    gmm_weight = best_weights[0]
+    NN_weight = best_weights[1]
+    XGB_weight = best_weights[2]
+    RF_weight = best_weights[3]
+    
+    # Calculating final probabilities using the best weights for each model
+    final_probs = (gmm_weight * gmm_probs + NN_weight * NN_probs +
+                   XGB_weight * XGB_probs + RF_weight * RF_probs) / 4
+
+    df = probabilities_to_dataframe(final_probs)
+    return df
+
+
+
+
+
 
 
 
