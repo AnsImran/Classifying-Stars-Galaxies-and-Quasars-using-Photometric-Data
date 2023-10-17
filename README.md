@@ -1,6 +1,8 @@
 # Classifying-Quasars-Galaxies-Stars-using-Photometry
+_Note: There are 2 notebooks [photometry.ipynb](photometry.ipynb) (models were initially created and ensembled here) and [production.ipynb](production/production.ipynb) (already saved models were loaded and used in production)_
 
-#### In this notebook I have tried to classify Quasars, Galaxies and Stars using photometric data.
+
+### I have tried to classify Quasars, Galaxies and Stars using photometric data.
 ### Motivations:
 Large catalogs of unlabelled stellar objects are available. Labelling these stellar objects is important for a number of reasons. E.g: for statistical poulation analyses and for [testing cosmological models](https://academic.oup.com/mnras/article/444/1/2/1016765) to name a few. Although these stellar objects can be classified by analyzing their optical spectrums but that process is time consuming. [Next generation of telescopes](https://ui.adsabs.harvard.edu/abs/2019ApJ...873..111I/abstract) will increase the quantity of available unlabelled data even more! That's why we have tried to use the photometric data and a combination of machine learning approaches to label the stellar objects.
 
