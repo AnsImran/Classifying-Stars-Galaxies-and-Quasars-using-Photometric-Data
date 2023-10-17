@@ -1,4 +1,4 @@
-# Classifying-Quasars-Stars-Galaxies-using-Photometry
+# Classifying-Quasars-Galaxies-Stars-using-Photometry
 
 #### In this notebook I have tried to classify Quasars, Galaxies and Stars using photometric data.
 ### Motivations:
