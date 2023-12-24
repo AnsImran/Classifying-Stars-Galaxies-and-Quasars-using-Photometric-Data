@@ -32,7 +32,7 @@ Large catalogs of unlabelled stellar objects are available. Labelling these stel
 ## 3. Data Classification
  - ### Unsupervised Learning
    - ##### Gaussian Mixture Model - Clustering
-      - ###### Choosing the best Permutation
+      - ##### Choosing the best Permutation
 
  - ### Supervised Learning
    - ##### Neural Network
