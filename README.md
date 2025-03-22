@@ -3,11 +3,11 @@
 
 # End-to_End Machine Learning Project
 
-## Data Cleaning and Processing
+## Data Cleaning and Processing and Feature Engineering
 
 ## Pre-Production-Testing
 
-## Deployment on Aws Lambda
+## Deployment on Aws Lambda Using Docker
 
 
 ---
