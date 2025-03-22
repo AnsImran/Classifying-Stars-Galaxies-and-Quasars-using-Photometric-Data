@@ -21,7 +21,9 @@
 ![4](05__Results/api-in-action-p4.JPG)
 
 ---
-## Classifying-Quasars-Galaxies-Stars-using-Photometry
+
+## Some Further details about Project
+### Classifying-Quasars-Galaxies-Stars-using-Photometry
 #### I have tried to classify Quasars, Galaxies and Stars using photometric data.
 #### Motivations:
 Large catalogs of unlabelled stellar objects are available. Labelling these stellar objects is important for a number of reasons. E.g: for statistical poulation analyses and for [testing cosmological models](https://academic.oup.com/mnras/article/444/1/2/1016765) to name a few. Although these stellar objects can be classified by analyzing their optical spectrums but that process is time consuming. [Next generation of telescopes](https://ui.adsabs.harvard.edu/abs/2019ApJ...873..111I/abstract) will increase the quantity of available unlabelled data even more! That's why I have tried to use the photometric data and a combination of machine learning approaches to label the stellar objects.
@@ -72,22 +74,8 @@ The results were:
 - For objects correctly_classified as Galaxies, 86.7% of them had a probability greater than 0.9 of being a Galaxy.
 - For objects correctly_classified as Stars, 99.6% of them had a probability greater than 0.9 of being a Star.
 ### Screenshots from the notebook [pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb):
-<img src="05__Results/4.PNG" alt="4" width="400"/>
-<img src="05__Results/1.PNG" alt="1" width="400"/>
-<img src="05__Results/2.PNG" alt="2" width="400"/>
-<img src="05__Results/3.PNG" alt="3" width="400"/>
-
-
-
-
-### Features Used
-| Feature Name   | Description                                                                                                       |
-|---------------|-------------------------------------------------------------------------------------------------------------------|
-| u             | Ultraviolet filter in the photometric system                                                                   |
-| g             | Green filter in the photometric system                                                                        |
-| r             | Red filter in the photometric system                                                                          |
-| i             | Near Infrared filter in the photometric system                                                                |
-| z             | Infrared filter in the photometric system                                                                     |
-| redshift      | Redshift value based on the increase in wavelength                                                            |
-| class         | Object class (galaxy, star, or quasar object)                                                                 |
+<img src="05__Results/4.PNG" alt="4" width="600"/>
+<img src="05__Results/1.PNG" alt="1" width="600"/>
+<img src="05__Results/2.PNG" alt="2" width="600"/>
+<img src="05__Results/3.PNG" alt="3" width="600"/>
 
