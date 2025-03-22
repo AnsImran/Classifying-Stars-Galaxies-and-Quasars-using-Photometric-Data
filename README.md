@@ -3,7 +3,7 @@
 
 
 # Classifying-Quasars-Galaxies-Stars-using-Photometry
-_Note: There are 2 notebooks [photometry.ipynb](photometry.ipynb) (models were initially created and ensembled here) and [production.ipynb](production/production.ipynb) (already saved models were loaded and used in production)_
+_Note: There are 2 notebooks [photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb) (models were initially created and ensembled here) and [production.ipynb](production/production.ipynb) (already saved models were loaded and used in production)_
 
 
 ### I have tried to classify Quasars, Galaxies and Stars using photometric data.
