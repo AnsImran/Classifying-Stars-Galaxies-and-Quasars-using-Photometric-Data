@@ -11,21 +11,12 @@
 
 ## Pre-Deployment-Testing: _[comparing_models](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_ **AND** _[pre_production_testing](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
 
-## Deployment on Amazon Aws Lambda Using Docker
+## [Deploying on Amazon Aws Lambda Using Docker](https://github.com/AnsImran/Classifying-Quasars-Galaxies-Stars-using-Photometry/tree/master/04__Deploying_on_Amazon_Aws_Lambda)
 
 ## [Project_Report](https://drive.google.com/file/d/1YuQdWmnDv7n2f3TlJHRXMCNYYN-OnXaD/view?usp=sharing) (Detailed)
 
 
 ---
-
-# Project Summary and References
-Data Cleaning, Processing and Feature Engineering, Data Visualization and Training Machine Learning Models: _[photometry.ipynb]_
-
-Pre-Deployment-Testing:  **AND** 
-
-Deploying on Amazon AWS Lambda
----
-
 
 # Classifying-Quasars-Galaxies-Stars-using-Photometry
 ### I have tried to classify Quasars, Galaxies and Stars using photometric data.
