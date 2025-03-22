@@ -1,0 +1,3 @@
+docker run --entrypoint python3 -p 9000:9000 <image-name> app.py
+e.g:
+docker run --entrypoint python3 -p 9000:9000 stellar_preds_v2 app.py

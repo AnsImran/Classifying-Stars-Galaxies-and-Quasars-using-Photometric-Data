@@ -18,7 +18,7 @@ from mangum import Mangum
 from fastapi.responses import JSONResponse
 import uvicorn
 
-
+import xgboost
 
 
 
