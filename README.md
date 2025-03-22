@@ -11,6 +11,7 @@
 
 ## Deployment on Amazon Aws Lambda Using Docker
 
+## [Project_Report](https://github.com/AnsImran/Classifying-Quasars-Galaxies-Stars-using-Photometry/blob/master/06__Project_Report/Project_Report.pdf) (Detailed)
 
 ---
 
