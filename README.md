@@ -1,6 +1,16 @@
 ### Skills demonstarted:
 (pandas, numpy, tensorflow/keras, scikit-learn & matplotlib)
 
+# End-to_End Machine Learning Project
+
+## Data Cleaning and Processing
+
+## Pre-Production-Testing
+
+## Deployment on Aws Lambda
+
+
+---
 
 # Classifying-Quasars-Galaxies-Stars-using-Photometry
 Note: There are 2 notebooks [photometry](02__Data_Analysis__Training__Saving_Models/photometry.ipynb) (models were initially created and ensembled here) and [pre_production_testing](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb) (already saved models were loaded and tested here)
