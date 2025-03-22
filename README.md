@@ -1,7 +1,7 @@
 ## End-to_End Machine Learning Project
 
 #### Skills demonstarted:
-(pandas, numpy, tensorflow, scikit-learn, matplotlib, uvicorn, fastapi, docker, amazon_aws_lambda)
+(pandas, numpy, tensorflow, scikit-learn, matplotlib, fastapi, docker, amazon_aws_lambda)
 
 ### [Data Cleaning, Processing and Feature Engineering](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
