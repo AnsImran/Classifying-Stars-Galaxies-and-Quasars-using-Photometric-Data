@@ -5,6 +5,8 @@
 
 ## Data Cleaning, Processing and Feature Engineering
 
+## Data Visualization
+
 ## Training Machine Learning Models
 
 ## Pre-Deployment-Testing
