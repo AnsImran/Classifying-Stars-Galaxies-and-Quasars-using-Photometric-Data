@@ -14,7 +14,7 @@ Large catalogs of unlabelled stellar objects are available. Labelling these stel
 ## [Based on Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
 
 
-# Table of Contents [photometry.ipynb](photometry.ipynb)
+# Table of Contents [photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
 ## 1. Data Cleaning & Data Preparation
    - ##### Loading data as a Pandas Data Frame
