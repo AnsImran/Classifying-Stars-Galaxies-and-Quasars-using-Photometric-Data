@@ -1,5 +1,5 @@
 ### Skills demonstarted:
-(pandas, numpy, tensorflow/keras, scikit-learn & matplotlib)
+(pandas, numpy, tensorflow/keras, scikit-learn, matplotlib, uvicorn, fastapi, docker, amazon aws lambda)
 
 # End-to_End Machine Learning Project
 
