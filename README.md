@@ -11,7 +11,7 @@
 
 ### Pre-Deployment Testing: [comparing_models](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb) AND [pre_production_testing](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)
 
-### [Deploying on Amazon Aws Lambda Using Docker](https://github.com/AnsImran/Classifying-Quasars-Galaxies-Stars-using-Photometry/tree/master/04__Deploying_on_Amazon_Aws_Lambda)
+### [Deploying on Amazon AWS Lambda Using Docker](https://github.com/AnsImran/Classifying-Quasars-Galaxies-Stars-using-Photometry/tree/master/04__Deploying_on_Amazon_Aws_Lambda)
 
 ### [Project Report](https://drive.google.com/file/d/1YuQdWmnDv7n2f3TlJHRXMCNYYN-OnXaD/view?usp=sharing) (Detailed)
 
