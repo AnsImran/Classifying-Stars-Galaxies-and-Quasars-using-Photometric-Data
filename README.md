@@ -68,7 +68,7 @@ Large catalogs of unlabelled stellar objects are available. Labelling these stel
 
 ---
 
-### Pre-Deployment Results
+## Pre-Deployment Results
 The results were:
 - For objects correctly_classified as Quasars, 90.3% of them had a probability greater than 0.9 of being a Quasar.
 - For objects correctly_classified as Galaxies, 86.7% of them had a probability greater than 0.9 of being a Galaxy.
