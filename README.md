@@ -55,7 +55,7 @@ The results were:
 - For objects correctly_classified as Quasars, 90.3% of them had a probability greater than 0.9 of being a Quasar.
 - For objects correctly_classified as Galaxies, 86.7% of them had a probability greater than 0.9 of being a Galaxy.
 - For objects correctly_classified as Stars, 99.6% of them had a probability greater than 0.9 of being a Star.
-### Screenshots from the notebook [production.ipynb](production/production.ipynb):
+### Screenshots from the notebook [pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb):
 ![4](05__results_screenshots/4.PNG)
 ![1](05__results_screenshots/1.PNG)
 ![2](05__results_screenshots/2.PNG)
