@@ -1,4 +1,4 @@
-## End-to_End Machine Learning Project
+## End-to-End Machine Learning Project
 
 #### Skills demonstarted:
 (pandas, numpy, tensorflow, scikit-learn, matplotlib, fastapi, docker, amazon_aws_lambda)
