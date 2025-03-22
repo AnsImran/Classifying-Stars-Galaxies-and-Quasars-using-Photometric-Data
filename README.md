@@ -3,13 +3,13 @@
 
 # End-to_End Machine Learning Project
 
-## Data Cleaning, Processing and Feature Engineering
+## [Data Cleaning, Processing and Feature Engineering](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## Data Visualization
+## [Data Visualization](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## Training Machine Learning Models
+## [Training Machine Learning Models](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## Pre-Deployment-Testing
+## Pre-Deployment-Testing: _[comparing_models.ipynb](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_ **AND** _[pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
 
 ## Deployment on Amazon Aws Lambda Using Docker
 
@@ -19,10 +19,12 @@
 ---
 
 # Project Summary and References
-Data Cleaning, Processing and Feature Engineering, Data Visualization and Training Machine Learning Models: _[photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)_
+Data Cleaning, Processing and Feature Engineering, Data Visualization and Training Machine Learning Models: _[photometry.ipynb]_
 
-Pre-Deployment-Testing: _[comparing_models.ipynb](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_ **AND** _[pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
+Pre-Deployment-Testing:  **AND** 
 
+Deploying on Amazon AWS Lambda
+---
 
 
 # Classifying-Quasars-Galaxies-Stars-using-Photometry
