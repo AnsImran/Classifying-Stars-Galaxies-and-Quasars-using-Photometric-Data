@@ -9,7 +9,7 @@
 
 ## [Training Machine Learning Models](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## Pre-Deployment-Testing: _[comparing_models.ipynb](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_ **AND** _[pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
+## Pre-Deployment-Testing: _[comparing_models](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_ **AND** _[pre_production_testing](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
 
 ## Deployment on Amazon Aws Lambda Using Docker
 
