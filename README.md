@@ -3,7 +3,7 @@
 
 # End-to_End Machine Learning Project
 
-## Data Cleaning and Processing and Feature Engineering
+## Data Cleaning, Processing and Feature Engineering
 
 ## Pre-Production-Testing
 
