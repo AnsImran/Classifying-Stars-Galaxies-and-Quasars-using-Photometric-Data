@@ -18,16 +18,9 @@
 ---
 
 # Project Summary and References
-Data Cleaning, Processing and Feature Engineering, Data Visualization and Training Machine Learning Models
+Data Cleaning, Processing and Feature Engineering, Data Visualization and Training Machine Learning Models: _[photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)_
 
-_[photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)_
-
-
-Pre-Deployment-Testing
-
-_[comparing_models.ipynb](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_
-
-_[pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
+Pre-Deployment-Testing: _[comparing_models.ipynb](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb)_ **AND** _[pre_production_testing.ipynb](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)_
 
 
 
