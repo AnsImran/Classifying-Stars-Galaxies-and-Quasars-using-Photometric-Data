@@ -5,6 +5,8 @@
 
 ## Data Cleaning, Processing and Feature Engineering
 
+## Training Machine Learning Models
+
 ## Pre-Production-Testing
 
 ## Deployment on Aws Lambda Using Docker
