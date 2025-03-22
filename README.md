@@ -17,7 +17,10 @@
 
 
 ---
+# Deployment Snapshot on Amazon AWS Lambda
+![4](05__results_screenshots/api-in-action-p4.JPG)
 
+---
 # Classifying-Quasars-Galaxies-Stars-using-Photometry
 ### I have tried to classify Quasars, Galaxies and Stars using photometric data.
 ### Motivations:
