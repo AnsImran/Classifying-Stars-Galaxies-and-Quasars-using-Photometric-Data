@@ -1,23 +1,23 @@
-### Skills demonstarted:
+#### Skills demonstarted:
 (pandas, numpy, tensorflow, scikit-learn, matplotlib, uvicorn, fastapi, docker, amazon_aws_lambda)
 
-# End-to_End Machine Learning Project
+## End-to_End Machine Learning Project
 
-## [Data Cleaning, Processing and Feature Engineering](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
+### [Data Cleaning, Processing and Feature Engineering](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## [Data Visualization](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
+### [Data Visualization](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## [Training Machine Learning Models](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
+### [Training Machine Learning Models](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## Pre-Deployment Testing: [comparing_models](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb) AND [pre_production_testing](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)
+### Pre-Deployment Testing: [comparing_models](03__Pre_Deployment/03__pre_production_notebooks/01__comparing_models.ipynb) AND [pre_production_testing](03__Pre_Deployment/03__pre_production_notebooks/02__pre_production_testing.ipynb)
 
-## [Deploying on Amazon Aws Lambda Using Docker](https://github.com/AnsImran/Classifying-Quasars-Galaxies-Stars-using-Photometry/tree/master/04__Deploying_on_Amazon_Aws_Lambda)
+### [Deploying on Amazon Aws Lambda Using Docker](https://github.com/AnsImran/Classifying-Quasars-Galaxies-Stars-using-Photometry/tree/master/04__Deploying_on_Amazon_Aws_Lambda)
 
-## [Project_Report](https://drive.google.com/file/d/1YuQdWmnDv7n2f3TlJHRXMCNYYN-OnXaD/view?usp=sharing) (Detailed)
+### [Project_Report](https://drive.google.com/file/d/1YuQdWmnDv7n2f3TlJHRXMCNYYN-OnXaD/view?usp=sharing) (Detailed)
 
 
 ---
-# Deployment Snapshot on Amazon AWS Lambda
+## Deployment Snapshot on Amazon AWS Lambda
 ![4](05__results_screenshots/api-in-action-p4.JPG)
 
 ---
