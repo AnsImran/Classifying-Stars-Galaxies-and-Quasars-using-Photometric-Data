@@ -17,7 +17,7 @@
 
 
 ---
-# Deployment Snapshot on Amazon AWS Lambda
+# Deployment Snapshot from Amazon AWS Lambda
 ![4](05__results_screenshots/api-in-action-p4.JPG)
 
 ---
