@@ -21,18 +21,18 @@
 ![4](05__results_screenshots/api-in-action-p4.JPG)
 
 ---
-# Classifying-Quasars-Galaxies-Stars-using-Photometry
-### I have tried to classify Quasars, Galaxies and Stars using photometric data.
-### Motivations:
+## Classifying-Quasars-Galaxies-Stars-using-Photometry
+#### I have tried to classify Quasars, Galaxies and Stars using photometric data.
+#### Motivations:
 Large catalogs of unlabelled stellar objects are available. Labelling these stellar objects is important for a number of reasons. E.g: for statistical poulation analyses and for [testing cosmological models](https://academic.oup.com/mnras/article/444/1/2/1016765) to name a few. Although these stellar objects can be classified by analyzing their optical spectrums but that process is time consuming. [Next generation of telescopes](https://ui.adsabs.harvard.edu/abs/2019ApJ...873..111I/abstract) will increase the quantity of available unlabelled data even more! That's why I have tried to use the photometric data and a combination of machine learning approaches to label the stellar objects.
 
 
-## [Based on Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
+### [Based on Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17)
 
 
-# Table of Contents [photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
+## Table of Contents [photometry.ipynb](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
-## 1. Data Cleaning & Data Preparation
+### 1. Data Cleaning & Data Preparation
    - ##### Loading data as a Pandas Data Frame
    - ##### Selecting relevant columns/features
    - ##### Removing unphysical records/rows
@@ -41,11 +41,11 @@ Large catalogs of unlabelled stellar objects are available. Labelling these stel
    - ##### Converting data into numpy arrays
    - ##### Normalizing The Data
 
-## 2. Data Visualisation
+### 2. Data Visualisation
  - #### Principal Component Analysis
    - ##### Intercative 3d scatter plot
 
-## 3. Data Classification
+### 3. Data Classification
  - ### Unsupervised Learning
    - ##### Gaussian Mixture Model - Clustering
       - ##### Choosing the best Permutation
@@ -55,12 +55,12 @@ Large catalogs of unlabelled stellar objects are available. Labelling these stel
    - ##### XGBoost
    - ##### Random Forest 
 
-## 4. Model Ensembling
+### 4. Model Ensembling
    - ##### Simple-Random-Search for weight optimization
 
-## 5. Conclusions
+### 5. Conclusions
 
-## 6. What's Next?
+### 6. What's Next?
    - ##### How can we achieve this?
    - ##### Possible Limitations
 
