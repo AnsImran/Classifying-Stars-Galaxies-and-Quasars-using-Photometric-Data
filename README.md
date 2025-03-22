@@ -18,7 +18,7 @@
 
 ---
 ## Deployment Snapshot on Amazon AWS Lambda
-![4](05__results_screenshots/api-in-action-p4.JPG)
+![4](05__Results/api-in-action-p4.JPG)
 
 ---
 ## Classifying-Quasars-Galaxies-Stars-using-Photometry
