@@ -9,7 +9,7 @@
 
 ## Pre-Production-Testing
 
-## Deployment on Aws Lambda Using Docker
+## Deployment on Amazon Aws Lambda Using Docker
 
 
 ---
