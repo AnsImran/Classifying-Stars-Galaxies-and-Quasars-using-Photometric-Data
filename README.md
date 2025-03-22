@@ -7,7 +7,7 @@
 
 ## Training Machine Learning Models
 
-## Pre-Production-Testing
+## Pre-Deployment-Testing
 
 ## Deployment on Amazon Aws Lambda Using Docker
 
