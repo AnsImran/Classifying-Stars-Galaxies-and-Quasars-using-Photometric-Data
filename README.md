@@ -56,10 +56,10 @@ The results were:
 - For objects correctly_classified as Galaxies, 86.7% of them had a probability greater than 0.9 of being a Galaxy.
 - For objects correctly_classified as Stars, 99.6% of them had a probability greater than 0.9 of being a Star.
 ### Screenshots from the notebook [production.ipynb](production/production.ipynb):
-![4](results_screenshots/4.PNG)
-![1](results_screenshots/1.PNG)
-![2](results_screenshots/2.PNG)
-![3](results_screenshots/3.PNG)
+![4](05__results_screenshots/4.PNG)
+![1](05__results_screenshots/1.PNG)
+![2](05__results_screenshots/2.PNG)
+![3](05__results_screenshots/3.PNG)
 
 
 
