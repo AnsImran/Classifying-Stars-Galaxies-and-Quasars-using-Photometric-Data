@@ -3,7 +3,7 @@
 #### Skills demonstarted:
 (pandas, numpy, tensorflow, scikit-learn, matplotlib, fastapi, docker, amazon_aws_lambda, postman)
 
-### [Data Cleaning, Processing and Feature Engineering](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
+### [Data Cleaning and Data Processing](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
 ### [Data Visualization](02__Data_Analysis__Training__Saving_Models/photometry.ipynb)
 
