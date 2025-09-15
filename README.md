@@ -3,7 +3,7 @@ Note:
 This version of the project works well if you expect around a thousand viewers per week.
 But it is **not designed to scale** beyond that.
 
-If you want a highly scalable project, please contact me at **[ansimran@protonmail.com](mailto:ansimran@protonmail.com)**.
+If you want a highly scalable version, contact me at **[ansimran@protonmail.com](mailto:ansimran@protonmail.com)**.
 
 The main goal here is to **showcase Machine Learning skills**, not full-stack AI development skills.
 
